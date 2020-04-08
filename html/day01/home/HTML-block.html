@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重构块级元素</title>
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            /*粗细程度*/
+            font-weight: normal;
+            /*字体大小*/
+            font-size: 16px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        ul,
+        ol,
+        dl {
+            /*外边距*/
+            margin: 0;
+            /*内边距*/
+            padding: 0;
+            /*列表样式，小黑点，数字*/
+            list-style: none;
+        }
+
+        dd {
+            margin: 0;
+        }
+
+        address{
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 块级元素 -->
+    <div>div标签</div>
+    <h1>h1标签</h1>
+    <h2>h2标签</h2>
+    <h3>h3标签</h3>
+    <h4>h4标签</h4>
+    <h5>h5标签</h5>
+    <h6>h6标签</h6>
+    <p>p标签</p>
+    <ul>
+        <li>ul li标签</li>
+    </ul>
+    <ol>
+        <li>ol li标签</li>
+    </ol>
+    <dl>
+        <dt>dl dt标签</dt>
+        <dd>dl dd标签</dd>
+    </dl>
+    <hr>
+    <header>header标签</header>
+    <nav>nav标签</nav>
+    <article>article标签</article>
+    <section>section标签</section>
+    <aside>aside标签</aside>
+    <footer>footer标签</footer>
+    <address>address标签</address>
+</body>
+
+</html>
