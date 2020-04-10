@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 重置 */
+        body{
+            font: 12px 'Microsoft Yahei','微软雅黑';
+            /* 子元素可继承 */
+            color: #666666;
+        }
+        body,ul{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            /* 内部样式优先级高不会继承 */
+            color: #666666;
+        }
+        /* 导航 */
+        .nav{
+            background-color: #f4f4f4;
+            position: relative;
+        }
+        .nav>ul::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .nav>ul>li{
+            float: left;
+            line-height: 3em;
+            text-align: center;
+            width: 100px;
+        }
+        .nav>ul>li:hover{
+            background-color: purple;
+        }
+        .nav>ul>li:hover a{
+            color: snow;
+        }
+        .nav>ul>li:hover>.nav_son{
+            display: block;
+        }
+        .nav .nav_son{
+            position: absolute;
+            background-color: purple;
+            width: 100%;
+            top: 3em;
+            left: 0;
+            text-align: left;
+            padding: 1em 1em;
+            display: none;
+        }
+        /* /导航 */
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="">首页</a></li>
+            <li>
+                <a href="">学院风采</a>
+                <div class="nav_son">
+                    软件学院
+                </div>
+            </li>
+            <li>
+                <a href="">校园招聘</a>
+                <div class="nav_son">
+                    <ul>
+                        <li>百度</li>
+                        <li>阿里</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a href="">联系我们</a>
+                <div class="nav_son">
+                    IOC
+                </div>
+                <div class="nav_son">
+                    VO
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
