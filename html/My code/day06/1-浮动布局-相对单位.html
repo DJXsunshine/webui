@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易严选手机端</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        .products{
+            max-width: 750px;
+            margin: 0 auto;
+        }
+        .products > ul::after{
+            content: "";
+            clear: both;
+            display: block;
+        }
+        .products > ul > li{
+            /* 设置的边框和内边距的值是包含在width内的 */
+            box-sizing: border-box;
+            float: left;
+            width: 20%;
+            /* background-color: skyblue; */
+            /* border: 1px solid #000000; */
+            padding: 1em;
+            background-clip: content-box;
+        }
+        .products > ul > li > img{
+            width: 100%;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="products">
+        <ul>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+            <li>
+                <img src="./images/1.png" alt="">
+                <div>文本描述</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

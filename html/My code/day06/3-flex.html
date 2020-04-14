@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伸缩盒</title>
+    <style>
+        .box{
+            /* height: 100px; */
+            display: flex;
+            flex-direction: row;
+            /* 约定盒子属性加在父元素 */
+            /* flex-wrap: wrap; */
+            background-color: #f4f4f4;
+        }
+        .box > div{
+            background-color: skyblue;
+            margin: 1%;
+            height: 50px;
+            /* flex-grow: 1; */
+            flex-basis: 18%;
+            /* flex-grow: 1; */
+            /* flex-shrink: 1; */
+        }
+        .box > div:nth-child(odd){
+            flex-shrink: 1;
+        }
+        .box > div:nth-child(even){
+            flex-shrink: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div>one</div>
+        <div>two</div>
+        <div>three</div>
+        <div>one</div>
+        <div>two</div>
+        <div>three</div>
+        <div>one</div>
+        <div>two</div>
+        <div>three</div>
+        <div>one</div>
+        <div>two</div>
+        <div>three</div>
+    </div>
+</body>
+</html>

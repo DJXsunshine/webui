@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易严选</title>
+    <style>
+        /* 字体图标库 */
+        @font-face {
+            font-family: 'iconfont';
+            /* project id 1741503 */
+            src: url('https://at.alicdn.com/t/font_1741503_p9heye4rpdn.eot');
+            src: url('https://at.alicdn.com/t/font_1741503_p9heye4rpdn.eot?#iefix') format('embedded-opentype'),
+                url('https://at.alicdn.com/t/font_1741503_p9heye4rpdn.woff2') format('woff2'),
+                url('https://at.alicdn.com/t/font_1741503_p9heye4rpdn.woff') format('woff'),
+                url('https://at.alicdn.com/t/font_1741503_p9heye4rpdn.ttf') format('truetype'),
+                url('https://at.alicdn.com/t/font_1741503_p9heye4rpdn.svg#iconfont') format('svg');
+        }
+        .iconfont {
+            font-family: 'iconfont';
+            font-style: normal;
+        }
+
+        /* 重置样式 */
+        body,
+        ul,
+        ol,
+        p,
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
+        ul,
+        ol {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        /* 公共样式 */
+        html {
+            font-size: 38px;
+        }
+        .container {
+            height: 100%;
+            background-color: skyblue;
+        }
+
+        /* 顶部 */
+        .header {
+            background-color: #ffffff;
+        }
+        .search_bar {
+            padding: .21333rem .4rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+        .search_bar>.logo {
+            width: 1.84rem;
+            height: .53333rem;
+            font-size: .32rem;
+            display: inline-block;
+            margin-right: .26667rem;
+            font-family: '宋体';
+            text-align: center;
+            line-height: .53333rem;
+        }
+        .search_bar>.search_box {
+            height: .74667rem;
+            flex-grow: 1;
+            font-size: .37333rem;
+        }
+        .search_bar>.search_box input {
+            display: block;
+            width: 90%;
+            height: 100%;
+            border: none;
+            background-color: rgb(237, 237, 237);
+            font-size: .37333rem;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .search_bar>.btn_login {
+            width: .98667rem;
+            height: .53333rem;
+            font-size: .32rem;
+            color: #DD1A21;
+            border: 1px solid #DD1A21;
+            border-radius: .10667rem;
+            line-height: .53333rem;
+            text-align: center;
+            margin-left: .21333rem;
+        }
+
+        .nav_wrapper {
+            position: relative;
+            font-size: .37333rem;
+        }
+        .nav_wrapper > .nav {
+            flex-grow: 1;
+            overflow: hidden;
+            margin-right: 2.5rem;
+        }
+        .nav_wrapper > .nav > ul {
+            width: 1600px;
+        }
+        .nav_wrapper > .nav > ul::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .nav_wrapper > .nav > ul > li {
+            float: left;
+            padding: 0 1.3em;
+        }
+        .nav_wrapper >.toggle {
+            width: 1.33333rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #ffffff;
+        }
+        /* 内容 */
+        .content {
+
+        }
+
+        /* 底部导航 */
+        .footer {
+            position: fixed;
+            height: 1.30667rem;
+            width: 100%;
+            background-color: #ffffff;
+            bottom: 0;
+            border-top: 1px solid #d9d9d9;
+        }
+        .footer>ul {
+            height: 100%;
+            display: flex;
+            padding: .2em;
+        }
+        .footer>ul>li {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .footer>ul>li span {
+            font-size: .32rem;
+        }
+        .footer>ul>.current{
+            color: #dd1a21;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <!-- 首行 -->
+            <div class="search_bar">
+                <a href="" class="logo">网易严选</a>
+                <div class="search_box">
+                    <input type="text" placeholder="&#xe63c;搜索商品, 共27316款好物" class="iconfont">
+                </div>
+                <div class="btn_login">登录</div>
+            </div>
+            <!-- 导航 -->
+            <div class="nav_wrapper">
+                <div class="nav">
+                  <ul>
+                    <li><a href="">推荐</a></li>
+                    <li><a href="">居家生活</a></li>
+                    <li><a href="">服饰鞋包</a></li>
+                    <li><a href="">美食酒水</a></li>
+                    <li><a href="">母婴亲自</a></li>
+                    <li><a href="">运动履行</a></li>
+                    <li><a href="">数码家电</a></li>
+                    <li><a href="">全球特色</a></li>
+                  </ul>
+                </div>
+                <div class="toggle iconfont">&#xe629;</div>
+            </div>
+        </header>
+        <article class="content">
+
+        </article>
+        <footer class="footer">
+            <ul>
+                <li class="current">
+                    <span class="iconfont">&#xe6bc;</span>
+                    <span>首页</span>
+                </li>
+                <li>
+                    <span class="iconfont">&#xe659;</span>
+                    <span>分类</span>
+                </li>
+                <li>
+                    <span class="iconfont">&#xe62e;</span>
+                    <span>值得买</span>
+                </li>
+                <li>
+                    <span class="iconfont">&#xe609;</span>
+                    <span>购物车</span>
+                </li>
+                <li>
+                    <span class="iconfont">&#xe681;</span>
+                    <span>个人</span>
+                </li>
+            </ul>
+        </footer>
+    </div>
+</body>
+
+</html>
