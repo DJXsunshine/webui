@@ -538,6 +538,152 @@ web层：获取参数
 
 		软件工作室
 
+	13.表格与表单（html）
+		【一般应用在后台管理系统中】
+		html标签（块、行内、功能【table\iframe\form】）
+		css	
+			选择器（基本，层次，属性过滤器，伪元素过滤器，伪类过滤器）
+			规则（文本，字体，背景，列表，盒子）
+			盒子模型
+			布局（浮动布局，定位布局，伸缩盒布局）
+		--bootstrap
+
+		1）表格
+			与列表类似，用于展现数据，一般不用于布局，默认样式过于复杂
+				你是不是做技术？？？IT男（猥琐，邋遢，有钱）【外界】table 表格
+				有格局？			div	架构
+
+		table	表格容器
+			caption	表格标题
+			thead	表格的表头
+				tr>th>*
+			tbody	表格的主体
+				tr>td>*
+			tfoot	表格的底部
+				tr>td>*
+
+		表格美化
+			1.属性
+				align:center
+				colspan	跨列	【通过excel来操作模拟】
+				rowspan	跨行
+			2.css 首选方案
+				table{
+					width: 90%;
+					margin: 0 auto;
+					border-collapse: collapse;
+				}
+				table td,
+				table th {
+					border:1px solid #ccc;
+					text-align:center;
+				}
+		display: block;
+		display: inline;
+		display: inline-block;
+		display: table;
+
+		2）iframe
+			frameset（已经不用了）
+			div.container
+				div.header
+				div.content
+					div.left
+					div.right
+
+			iframe
+			将外部的一个网页链接进来你当前的网页中
+		3）表单
+		注：
+			1.企业级开发一般不直接使用这些表单，因为表单元素在不同浏览器中显示样子不同，一般使用组件库(bootstrap/element-ui)
+			2.看点咨询精选
+				发表文章功能
+					标题	input:text
+					文章所属分类	select	如果是二级分类，需要插件，树形下拉菜单
+					正文	富文本编辑器(需要插件)
+			3.在表单学习的时候
+				掌握表单和表单元素的属性及特性
+				掌握交互原理
+
+			获取用户输入的数据，用户和程序之间的数据桥梁
+			同步
+				form表单直接提交
+			异步	适用于单页面应用程序
+				表单通过ajax提交
+			form
+				action	url(相对路径/绝对路径)
+				method	get/post
+				enctype	表单编码规则【只在post考虑，如果是get方式，参数指定为查询字符串，不可修改】
+					application/x-www-form-urlencoded
+						默认值			【保存或更新品牌数据（字符，name...）】
+						查询字符串
+						username=tom&...
+						规则：
+							属性名与属性值之间通过=分割
+							键值对之间通过&分割
+							属性值中如果有特殊字符(非字符或数字)，转换为百分比格式【这也是为什么二进制不能使用这种编码】
+								' ' -》 '+'
+
+					multipart/form-data	【附件上传（二进制图片）】
+						如果表单中出现了二进制文件，input:file，就无法使用查询字符串，只能用这种协议
+					text/plain
+			
+			application/json(目前同步请求中不支持，但是ajax是支持的)
+
+			web服务器项目
+				获取请求体中的值【查询字符串】
+				将查询字符串解析
+
+		表单及元素(每个都要有name)
+			form
+				input
+					text	单行文本框
+					password单行密码框
+					file	文件选择按钮
+					radio	单选按钮
+					checkbox复选按钮
+					reset	重置表单
+					submit	提交表单
+					button	普通按钮
+					...【H5新增】
+					search	搜索框
+					date	日期
+
+				select>option
+				textarea
+
+	14.动画（前端【移动互联】） - 美观夸张【扁平化】
+		语法
+		框架
+
+	15.过渡效果
+
+	16.媒体查询（响应式布局）
+
+-----
+javascript
+	准备：
+		ubuntu16.04 (1. 强制使用linux、2. 强制编写代码、3.最专业学习方法)
+		vim
+	1. ECMAScript 10天【vim】
+		语法标准（所有的浏览器及js解析器都遵循的标准）
+		let a = 3;
+		let sayHell = function(){}
+		sayHello();
+
+	2. DOM 	2天【vscode】
+		各个浏览器提供的通过js操作html的api，会有兼容性问题，另外只能在浏览器上执行
+		document.getElementById()
+		...
+
+	3. BOM 	1天 【vscode】
+		各个浏览器提供的通过js操作浏览器的api,会有兼容性问题，另外只能在浏览器上执行
+		alert()
+		prompt()
+		confirm()
+		XMLHttpRequest
+
+分布式附件服务器???
 ===============
 1.在html中的charset表示什么意思？
 	告诉浏览器使用charset指定的字符编码来解码

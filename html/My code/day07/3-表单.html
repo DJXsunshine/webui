@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+    <script>
+        //说一说你理解的ajax
+        //1.原生 js->调用bom（浏览器）-》委托浏览器向后台发送请求（Http协议）
+        /*
+            请求报文
+            请求行  get /login
+            请求头  代理/编码格式/cookie/token/...
+            请求体【POST】 参数
+        */
+        let loginForm = document.getElementById("loginForm");
+        loginForm.onsubmit = function(even){
+            //异步
+        }
+
+        //2.框架 jquery 基于回调函数的ajax
+
+        //3.框架 axios 基于promise
+    </script>
+</head>
+<body>
+    <div class="container">
+        <form action="#" id="loginForm" method="GET">
+            用户名<input type="text"><br>
+            密码<input type="password"><br>
+
+            方向
+            <select name="department" id="">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+            </select><br>
+            <!-- 头像
+            <input type="file" name="file" id=""><br> -->
+            性别
+            <label for="input_gender_male">
+                <input id="input_gender_male" type="radio" name="gender" value="male">男
+            </label>
+            <label for="input_gender_female">
+                <input id="input_gender_female" type="radio" name="gender" value="female">女
+            </label><br>
+
+            爱好
+            <label for="input_hobbies_basketball">
+                <input type="checkbox" name="hobbies" id="input_hobbies_basketball" value="basketball">篮球
+            </label>
+            <label for="input_hobbies_soccer">
+                <input type="checkbox" name="hobbies" id="input_hobbies_soccer" value="soccer">足球
+            </label><br>
+
+            介绍
+            <textarea name="introduce" id="" cols="30" rows="3"></textarea><br>
+
+            <button>普通按钮button：点击之间提交</button><br>
+            
+            搜索框
+            <input type="search" name="" id="" placeholder="请输入关键字"><br>
+
+            <input type="button" value="按钮">
+            <input type="reset" value="重置">
+            <input type="submit" value="登录">
+        </form>
+    </div>
+</body>
+</html>

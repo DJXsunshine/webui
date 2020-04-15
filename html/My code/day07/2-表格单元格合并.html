@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格单元格合并</title>
+    <style>
+        table.product,
+        table.money{
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table.product td,
+        table.money td{
+            border: 1px solid #cccccc;
+        }
+        table.product .label{
+            width: 100px;
+        }
+        table.money{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <iframe style="height: 80px;" id="fancybox-frame" name="fancybox-frame1586917602038" frameborder="0" scrolling="no" hspace="0"  src="http://i.tianqi.com/index.php?c=code&a=getcode&id=38&h=60&w=610"></iframe>
+
+        <table class="money">
+            <tbody>
+                <tr>
+                    <td rowspan="2">摘要</td>
+                    <td colspan="3">原值</td>
+                </tr>
+                <tr>
+                    <td>借方</td>
+                    <td>贷方</td>
+                    <td>净值</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="product">
+            <caption>项目计划进度表</caption>
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        一、项目基本情况
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">项目名称：</td>
+                    <td></td>
+                    <td class="label">项目编号：</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label">制作人：</td>
+                    <td></td>
+                    <td class="label">审核人：</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="label">项目经理：</td>
+                    <td></td>
+                    <td class="label">制作日期：</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
