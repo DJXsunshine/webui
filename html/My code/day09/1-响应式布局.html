@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式布局</title>
+    <link rel="stylesheet" href="../day05/css/common.css">
+    <style>
+        html{
+            font-size: 20px;/*rem*/
+        }
+        .videos{
+            background-color: #f4f4f4;
+            padding: 1em 0;
+        }
+        .wrapper{
+            width: 1500px;
+            margin: 0 auto;
+        }
+        @media screen and (max-width:1380px) {
+            .wrapper{
+                width: 1105px;
+            }
+            html{
+            font-size: 15px;/*rem*/
+            }
+        }
+        @media screen and (max-width:1780px) and (min-width:1500px) {
+            .wrapper{
+                width: 1500px;
+            }
+            html{
+            font-size: 20px;/*rem*/
+            }
+        }
+        @media screen and (min-width:1780px) {
+            .wrapper{
+                width: 1710px;
+            }
+            html{
+            font-size: 35px;/*rem*/
+            }
+        }
+        .videos>.wrapper>ul::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        .videos>.wrapper>ul>li{
+            float: left;
+            width: 16.28959276%;
+            /* background-color: blueviolet; */
+            margin-right: .452848868%;
+        }
+        .videos>.wrapper>ul>li:last-child{
+            margin-right: 0;
+        }
+        .videos .video>.img{
+            height: 5rem;
+            overflow: hidden;
+        }
+        .videos .video>.img img{
+            width: 100%;
+        }
+        .videos .video>.title{
+            line-height: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="videos">
+        <div class="wrapper">
+            <ul>
+                <li class="video">
+                    <div class="img">
+                        <img src="https://puui.qpic.cn/video_caps/0/m0946sa7dqp.q4.jpg/0" alt="">
+                    </div>
+                    <div class="title">青春有你2：第一季度</div>
+                </li>
+                <li class="video">
+                    <div class="img">
+                        <img src="https://puui.qpic.cn/video_caps/0/m0946sa7dqp.q4.jpg/0" alt="">
+                    </div>
+                    <div class="title">青春有你2：第一季度</div>
+                </li>
+                <li class="video">
+                    <div class="img">
+                        <img src="https://puui.qpic.cn/video_caps/0/m0946sa7dqp.q4.jpg/0" alt="">
+                    </div>
+                    <div class="title">青春有你2：第一季度</div>
+                </li>
+                <li class="video">
+                    <div class="img">
+                        <img src="https://puui.qpic.cn/video_caps/0/m0946sa7dqp.q4.jpg/0" alt="">
+                    </div>
+                    <div class="title">青春有你2：第一季度</div>
+                </li>
+                <li class="video">
+                    <div class="img">
+                        <img src="https://puui.qpic.cn/video_caps/0/m0946sa7dqp.q4.jpg/0" alt="">
+                    </div>
+                    <div class="title">青春有你2：第一季度</div>
+                </li>
+                <li class="video">
+                    <div class="img">
+                        <img src="https://puui.qpic.cn/video_caps/0/m0946sa7dqp.q4.jpg/0" alt="">
+                    </div>
+                    <div class="title">青春有你2：第一季度</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

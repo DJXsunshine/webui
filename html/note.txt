@@ -635,31 +635,203 @@ web层：获取参数
 				将查询字符串解析
 
 		表单及元素(每个都要有name)
-			form
-				input
-					text	单行文本框
-					password单行密码框
-					file	文件选择按钮
-					radio	单选按钮
-					checkbox复选按钮
-					reset	重置表单
-					submit	提交表单
-					button	普通按钮
-					...【H5新增】
-					search	搜索框
-					date	日期
-
-				select>option
-				textarea
+			<form>
+				<input type="text"/> 			单行文本框
+				<input type="password"/> 	单行密码框
+				<input type="file"/> 			文件选择按钮，encotype必须为multipart/form-data
+				<input type="radio"/> 		单选按钮
+					单选按钮一般会同时出现多个，着多个按钮的name值必须相等才能达到互斥的要求
+					value必须通过，这样当勾选某个单选按钮的时候会提交该按钮上的value值
+				<input type="checkbox"/> 	复选按钮
+				<input type="reset"/> 		将表单内容恢复默认
+				<input type="submit"/> 		提交表单
+				<input type="button/> 		普通按钮
+				...【h5新增】
+				<input type="search" placeholde="请输入关键字"/> 		搜索框
+				<input type="date" /> 														日期框
+				
+				
+				<select name="department">
+					<option value="1">JavaEE</option>
+					<option value="2">WebUI</option> 				当用户选择WebUI的时候，department的值为2
+					<option value="3">BigData</option>
+				</select>
+				<textarea name="introduce rows="" cols="">提示...</textarea>
+			</form>
 
 	14.动画（前端【移动互联】） - 美观夸张【扁平化】
 		语法
+			animation
+				1）关键帧定义
+					随时间移动的一些列的css规则
+					@keyframes	name{
+						0%{}
+						50%{}
+						100%{}
+
+						from{}
+						to{}
+					}
+				2）动画定义
+					.move{
+						animation-name:name,
+						animation-duration:1s
+					}
+
+					animation-name: move;					指定关键帧名称
+					animation-duration: 2000ms;				设置动画持续时间
+					animation-timing-function: linear;		时间曲线
+					animation-fill-mode: backwards;			动画完成后保持规则
+					animation-delay: 2s;					延迟时间
+					animation-iteration-count: infinite;	重复次数
+					animation-direction: alternate;			动画运行方向
+					animation	速写形式
+
+				3）应用c
+					div.move
+					开源组件库
+						自定义组件库
+				4）animation.css（css3 animation动画轮子）
+					1.导入animation.css
+					2.调用class
 		框架
 
-	15.过渡效果
+15. 过渡效果
+	一般表示在元素状态切换的时候的过渡效果
 
-	16.媒体查询（响应式布局）
+	transition-property
+		规则名
+		规则名1,规则名2[,...]
+		all
+		指明在状态切换的时候，哪些属性添加过渡效果
 
+	transition-duration
+		持续时间 ms/s
+	transition-timing-function
+		linear
+		steps
+	transition-delay 
+		延迟 ms/s
+	transition
+		transition-property transition-duration [transition-delay][transition-timing-function]
+
+16. 变形
+	transform 	
+		指定变形函数
+
+		1)旋转
+			rotate(deg) 	旋转度数
+			rotateX(deg)
+			rotateY(deg)
+			rotateZ(deg)
+		2) 平移
+			translate(长度)
+			translateX(长度)
+			translateY(长度)
+			translateZ(长度)
+		3) 放大
+			scale()
+			scaleX()
+			scaleY()
+		4) 拉伸
+			skew(deg)
+			skewX(deg)
+			skewY(deg)
+	transform-origin	
+		指定变形的原点
+
+
+	动画语法及规则：
+	过渡语法及规则：
+	变形语法及规则
+	相关性和区别及应用场景
+
+	17.媒体查询（响应式布局）
+		@media(媒体查询条件) {
+			选择器 {
+				规则
+			}
+		}
+		1) 媒体查询的应用位置
+			1.直接应用在规则内部
+				<style>
+					html{
+						font-size:20px
+					}
+					@media screen and (max-width:1500px){
+
+					}
+				</style>
+			2.应用在link标签中
+				<link rel="stylesheet" href="./css/screen_small.css" media="(max-width: 1380px)">
+				<link rel="stylesheet" href="./css/screen_middle.css" media="(min-width: 1380px) and (max-width: 1500px)">
+				<link rel="stylesheet" href="./css/screen_large.css" media="(min-width: 1500px) and (max-width: 1780px)">
+				<link rel="stylesheet" href="./css/screen_xlarge.html" media=" (min-width: 1780px) ">
+			3.应用在style标签中
+				<style>
+				
+				</style>
+				<style media="screen and (max-width: 1380px)">
+					.wrapper {
+						width: 1105px;
+					}
+					html {
+						font-size: 20px;  
+					}
+				</style>
+				<style media="screen and (min-width: 1380px) and (max-width: 1500px)">
+					.wrapper {
+						width: 1200px;
+					}
+					html {
+						font-size: 25px;  
+					}
+				</style>
+
+		2)注意：
+			1. 如果我们编写的网页运行在pc中，那么一般要给固定宽度，但是这个宽度如果随着屏幕的宽度发生改变，我们就成为响应式（.wrapper）
+			2. 如果我们编写的网页运行在大屏上，一般就采用满屏铺，不用指定wrapper
+			3. 如果我们编写的网页运行在mobile中，一般就采用满屏铺，不用指定wrapper,但是需要响应式布局
+				如果手机宽屏（横放）
+					原先一行放4列，横放后一行放2列
+				手机
+				pad
+
+		表达式
+			screen
+			min-width	宽度要大于
+			max-width	宽度要小于
+		运算符
+			and
+			or
+			not
+			only
+
+		屏幕标准：
+			2560px	宽屏高分辨率
+			1680px
+			1280px	正常屏幕
+
+	18.at规则
+		@font-face
+		@keyframes
+		@media
+		@import
+			@import url
+			@import url media...
+		@charset	指定当前css文件的编码格式（说明当前是xxx编码）
+
+	19.css脚本语言，css预处理【了解】https://developer.mozilla.org/zh-CN/docs/Glossary/CSS_preprocessor
+		sass
+		less
+	
+	20.bootstrap
+		第三方：iconfont/animation.css/bootstrap
+		bs是css3的一个库，减少css代码编写，一般通过类调用
+
+		bootstrap-reboot.css	重置样式
+		bootstrap-grid.css		栅格布局（封装了flex布局【bs3封装float布局】）
+		bootstrap.css			完整样式
 -----
 javascript
 	准备：
