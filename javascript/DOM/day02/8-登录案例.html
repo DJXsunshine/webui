@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超时调用接口</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <!-- 引入axios -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        用户名：<input type="text" v-model="form.username" name="" id="">
+        密码：<input type="text" v-model="form.password" name="" id="">
+        {{form}}
+        <button @click="toLogin">登录</button>
+        <button @click="findDetail">根据token查询信息</button>
+        <button @click="findAllUser">查询用户详细信息</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+                    form:{}
+                }
+            },
+            created () {
+
+            },
+            methods: {
+                toLogin(){
+                    axios.post('http://47.106.244.1:8099/manager/user/login',this.form).then((res)=>{
+                        console.log(res.data.data);
+                        localStorage.setItem('token',res.data.data.token);
+                    })
+                },
+                findDetail(){
+                    var token = localStorage.getItem('token');
+                    axios.get('http://47.106.244.1:8099/manager/user/info?token='+token).then((res)=>{
+                        console.log(res.data.data);
+                        //将信息存储到浏览器
+                        localStorage.setItem('userInfo',JSON.stringify(res.data.data));
+                    })
+                },
+                findAllUser(){
+                    //获取浏览器存储中的用户信息
+                    var userInfo = JSON.parse(localStorage.getItem('userInfo'));
+                    axios.get('http://47.106.244.1:8099/manager/user/findUserById?id='+userInfo.id).then((res)=>{
+                        console.log(res.data.data);
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

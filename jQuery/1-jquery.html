@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery引入</title>
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script>
+        console.log(jQuery);
+        console.log($);
+        console.log(jQuery===$);
+
+        // 方法一
+        $(document).ready(function(){
+            var btn = $('button');
+            console.log(btn);
+        });
+        // 方法二
+        $(function(){
+            var btn = $('button');
+            console.log(btn);
+        })
+    </script>
+</head>
+<body>
+    <button>按钮</button>
+</body>
+</html>

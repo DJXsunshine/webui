@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件传值</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>总数:{{total}}</div>
+        <!-- 组件调用 -->
+        <demo-outer @reduce="reduceHandler" @add="addHandler"></demo-outer>
+        <demo-outer @reduce="reduceHandler" @add="addHandler"></demo-outer>
+        <demo-outer @reduce="reduceHandler" @add="addHandler"></demo-outer>
+    </div>
+    <script>
+        // 全局注册属性
+        Vue.component('demo-outer', {
+            template: `
+                <div>
+                    <div>当前数:{{count}}</div>
+                    <div>
+                        <button @click="reduceHandler">减少</button>
+                        <button @click="addHandler">增加</button>
+                    </div>
+                </div>
+            `,
+            data() {
+                // 调用三次
+                // let random = Math.random();
+                // console.log(random);
+                return {
+                    count:0
+                }
+            },
+            methods: {
+                // 减少
+                reduceHandler(){
+                    // 不推荐，不符合单向数据流
+                    // vm.total--;
+
+                    // 事件发射用于通知父组件
+                    this.$emit('reduce');
+                    this.count--;
+                },
+                // 增加
+                addHandler(){
+                    // vm.total++;
+
+                    this.$emit('add');
+                    this.count++;
+                }
+            }
+        })
+        // let vm = new Vue({
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    total:0
+                }
+            },
+            methods: {
+                reduceHandler(){
+                    this.total--;
+                },
+                addHandler(){
+                    this.total++;
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

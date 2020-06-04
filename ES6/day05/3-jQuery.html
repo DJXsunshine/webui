@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url:'http://39.96.21.48:8099/manager/category/findAllCategory',
+            method:'get',
+            data:{},
+            success:function(res){
+                res.data.forEach((item)=>{
+                    $.ajax({
+                        url:'http://39.96.21.48:8099/manager/article/findArticle',
+                        method:'get',
+                        data:{
+                            page:0,
+                            pageSize:10,
+                            categoryId:item.id
+                        },
+                        success:function(res){
+                            if(res.data.list.length !== 0){
+                                res.data.list.forEach((it)=>{
+                                    $.ajax({
+                                        url:'http://39.96.21.48:8099/manager/comment/findCommentByArticleId',
+                                        method:'get',
+                                        data:{
+                                            id:it.id
+                                        },
+                                        success:function(res){
+                                            console.log(res.data)
+                                        }
+                                    })
+                                })
+                            }
+                        }
+                    })
+                })
+            }
+        })
+        
+        // 两个请求的结果不确定是谁先返回
+        // 回调地狱
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

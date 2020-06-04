@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制图像</title>
+    <script>
+        window.onload=function(){
+            //获取canvas对象
+            /** @type {HTMLCanvasElement} */
+            var canvas = document.getElementById('canvas');
+            //获取2d上下文对象
+            var context = canvas.getContext('2d');
+
+            //创建图像,并设置地址
+            var image = new Image();
+            image.src='./logo.png';
+            console.log(image)
+            //绘制图像
+            image.onload=function(){
+                context.drawImage(image, 0, 0);
+            }
+            
+            
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400" style="border: 1px solid #333;"></canvas>
+</body>
+</html>

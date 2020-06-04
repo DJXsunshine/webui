@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>局部过滤器+全局过滤器</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{'globalFun' | globalFun}}-{{'localFun' | localFun}}
+    </div>
+    <script>
+        Vue.filter('globalFun',function(){
+            console.log('globalFun',[...arguments]);
+            return [...arguments];
+        })
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+
+                }
+            },
+            filters: {
+                'localFun':function(){
+                    console.log('localFun',[...arguments]);
+                    return [...arguments];
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

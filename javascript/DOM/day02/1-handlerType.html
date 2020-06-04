@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件类型</title>
+    <script>
+        window.onload=function(){
+            var input = document.getElementsByTagName("input")[0];
+            input.onkeydown=function(){
+                //用户敲回车触发 
+                if(event.keyCode==13){
+                   console.log(event) 
+                }
+            }
+            input.onkeyup=function(){
+                //用户输入空格触发
+                if(event.keyCode==32){
+                    console.log(event)
+                }
+            }
+
+            input.onfocus=function(){
+                console.log(event)
+            }
+            input.onblur=function(){
+                console.log(event)
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" name="" id="">
+</body>
+</html>

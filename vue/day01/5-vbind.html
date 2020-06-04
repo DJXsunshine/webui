@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <title>属性的绑定</title>
+</head>
+
+<body>
+<div id="app">
+    <div title="title">hello vue</div>
+    <div v-bind:title="title">hello vue</div>
+    <div :title="title">hello vue</div>
+</div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title:new Date().toLocaleDateString()
+                }
+            }, methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

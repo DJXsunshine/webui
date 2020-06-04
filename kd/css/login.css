@@ -1,0 +1,32 @@
+/* 禁止文字让选中 */
+body {
+    -moz-user-select: none;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.login {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/3.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.loginInner {
+    height: 300px;
+    width: 400px;
+    background-color: rgba(57, 117, 95, 0.1);
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+.loginInner:hover {
+    box-shadow: 5px 5px 15px white;
+}

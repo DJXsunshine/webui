@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件传值</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-bind:visible="false"将值变为布尔值false -->
+        <demo-outer :title="title" :visible="false"></demo-outer>
+        <!-- visible="false"将值变为字符串false -->
+        <demo-outer :title="title" visible="false"></demo-outer>
+    </div>
+    <script>
+        // 全局注册属性
+        Vue.component('demo-outer', {
+            template: `
+                <div>
+                    hello
+                    <div v-if="visible">{{title}}</div>
+                </div>
+            `,
+            props: ["title","visible"],
+            computed: {
+                // 计算visible的数据类型
+                typeofVisible(){
+                    return typeof this.visible;
+                }
+            }
+        })
+        // 第一个vue实例对象
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title:'我的第一个组件'
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM-document</title>
+	<script type="text/javascript">
+		//在文档加载完成之后，执行函数体内部的代码
+		window.onload = function(){
+			var dom = document.getElementById('helloDiv');			
+			var dom2 = document.getElementsByClassName('helloDiv')[0];
+			var dom3 = document.getElementsByName('helloDiv')[0];
+			var dom4 = document.getElementsByTagName('div')[0];
+			console.log(dom);			
+			console.log(dom2);			
+			console.log(dom3);
+			console.log(dom4);
+			//属性
+			console.log(document);
+			console.log(document.title);
+			console.log(document.head);
+			console.log(document.body);
+		}
+	</script>
+</head>
+<body>
+	<div id="helloDiv" class="helloDiv" name="helloDiv">hello</div>
+</body>
+</html>

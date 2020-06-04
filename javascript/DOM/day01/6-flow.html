@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件流</title>
+    <style>
+        .outer{
+            height: 300px;
+            width: 300px;
+            background-color: seashell;
+            border: 1px solid #333;
+        }
+        .center{
+            height: 200px;
+            width: 200px;
+            background-color: lightblue;
+            border: 1px solid #333;
+            margin: 50px;
+        }
+        .inner{
+            height: 100px;
+            width: 100px;
+            background-color: green;
+            border: 1px solid red;
+            margin: 50px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //获取最外层div
+            var outer = document.getElementsByClassName("outer")[0];
+            //获取中层div
+            var center = document.getElementsByClassName("center")[0];
+            //获取最内层div
+            var inner = document.getElementsByClassName("inner")[0];
+            
+            //给outer绑定事件
+            //outer
+            outer.onclick = function(){
+                // console.log(event.target);
+                console.log(this)
+            }
+            //给center绑定事件
+            //center
+            center.onclick = function(){
+                // console.log(event.target);
+                console.log(this)
+            }
+            //给inner绑定事件
+            //inner
+            inner.onclick = function(){
+                // console.log(event.target);
+                console.log(this);
+                //阻止事件冒泡
+                // event.stopPropagation();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="outer">
+        <div class="center">
+            <div class="inner"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax查询文章并显示</title>
+    <!-- 引入bootstrap的css文件 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <!-- 引入bootstrap的js文件 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.25.1/moment.min.js"></script>
+    <script>
+        $(function () {
+            var date;
+            var commenttime;
+            //将时间动态显示到页面上
+            setInterval(function(){
+                //获取当前时间
+                date = new Date();
+                //转换时间格式
+                commenttime = moment(date).format('YYYY/MM/DD hh:mm:ss');
+                //将时间设置到输入框
+                $('#time').val(commenttime);
+            },1000);
+
+            $('#saveBtn').on("click",function(){
+                var content = $('#contentVal').val();
+                $.post('http://47.106.244.1:8099/manager/comment/saveOrUpdateComment',{
+                    articleId:204,
+                    customerId:52,
+                    content:content,
+                    commenttime:commenttime
+                },function(res){
+                    alert(res.message);
+                })
+            })
+            //点击发表评论按钮时清空textarea
+            $('#contentBtn').on('click',function () {
+                $('textarea').val('');
+            })
+        })
+    </script>
+</head>
+<body>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="contentBtn">
+    发表评论
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">评论模态框</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="time">评论时间</label>
+                  <input type="text" class="form-control" id="time" aria-describedby="emailHelp" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="contentVal">评论内容</label>
+                  <textarea name="" id="contentVal" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="saveBtn" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

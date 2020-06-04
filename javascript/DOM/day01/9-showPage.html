@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网页滚动到某一位置显示元素</title>
+    <style>
+        .two{
+            height: 100px;
+            width: 100px;
+            position: fixed;
+            background-color: red;
+            top: 100px;
+            right: 50px;
+
+            opacity: 0;
+            /* display: none; */
+            /* visibility: hidden; */
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-name: ani2;/*首次刷新闪一次*/
+        }
+        .one{
+            height: 100px;
+            width: 100px;
+            background-color: skyblue;
+        }
+        /* 显示的动画 */
+        @keyframes ani1 {
+           from{
+                opacity: 0;
+           }
+           to{
+                opacity: 1;
+           } 
+        }
+        @keyframes ani2 {
+           from{
+                opacity: 1;
+           }
+           to{
+                opacity: 0;
+           } 
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var two = document.getElementsByClassName("two")[0];
+            document.onscroll=function(){
+                //html上方滚动的距离
+                var tmp = document.documentElement.scrollTop;
+                if(tmp>300){
+                    two.style="animation-name:ani1;";
+                }else{
+                    two.style="animation-name:ani2;";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="one">网页顶部</div>    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="two">网页底部</div>
+</body>
+</html>

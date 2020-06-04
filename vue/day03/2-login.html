@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="token">
+            你好：{{username}}
+            <a href="" v-on:click.prevent="logout">退出登录</a>
+
+            <div>
+                <table class="table">
+                    <thead>
+                        <th>编号</th>
+                        <th>文章标题</th>
+                        <th>所属栏目</th>
+                        <th>文章内容</th>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in articles" :key="item.id">
+                            <td>{{item.id}}</td>
+                            <td>{{item.title}}</td>
+                            <td>{{item.category.name}}</td>
+                            <td style="width: 500px;">{{item.content}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div v-else>
+            <a href="" v-on:click.prevent="toLogin">登录</a>
+            <a href="javascript:void(0);">没有账号？点击去注册</a>
+
+            <!-- 模态框 -->
+            <form @submit.prevent="login" :style="style">
+                用户名<input type="text" placeholder="请输入用户名" v-model="loginForm.username"><br>
+                密码<input type="password" placeholder="请输入密码" v-model="loginForm.password"><br>
+                <input type="submit" value="登录">
+            </form>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    token:'',
+                    username:'',
+                    // 控制模态框的初始状态 --> 隐藏
+                    style:{
+                        display: 'none'
+                    },
+                    // 登录时输入的信息
+                    loginForm:{},
+                    // 所有文章
+                    articles:[]
+                }
+            }, 
+            methods: {
+                // 加载所有文章
+                loadArticle(){
+                    $.get('http://106.54.117.183:8099/manager/article/findArticle',{pageSize:10,page:0},res=>{
+                        this.articles = res.data.list;
+                        console.log(this.articles)
+                    })
+                },
+                //显示模态框
+                toLogin(){
+                    this.style.display = "block";
+                },
+                login(){
+                    // let obj = {
+                    //     username: 'Sun',
+                    //     password:123456
+                    // };
+                    $.ajax({
+                        url:'http://106.54.117.183:8099/manager/user/login',
+                        method:'post',
+                        // 发送json格式数据
+                        contentType:'application/json',
+                        data:JSON.stringify(this.loginForm),
+                        success:res=>{
+                            this.token = res.data.token;
+                            localStorage.setItem('token',this.token);
+                            this.findMsg();
+                            // 查询文章
+                            this.loadArticle();
+                        }
+                    });
+                },
+                logout(){
+                    $.post('http://106.54.117.183:8099/manager/user/logout',res=>{
+                        //清空浏览器token
+                        localStorage.clear();
+                        // 从本地存储中获取token
+                        this.token = localStorage.getItem('token');
+                        //刷新浏览器
+                        location.reload();
+                    })
+                },
+                // 根据token查询
+                findMsg(){
+                    this.token = localStorage.getItem('token');
+                    $.get('http://106.54.117.183:8099/manager/user/info',{'token':this.token},res=>{
+                        this.username = res.data.username;
+                    })
+                }
+            },
+            // 页面加载的时候
+            created () {
+                if(this.token){
+                    //查询用户信息
+                    this.findMsg();
+                    //查询所有文章
+                    this.loadArticle();
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

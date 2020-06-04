@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域插槽</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <demo-div :data="categories">
+            <template v-slot:list="slot">
+                <!-- scope为组件抛出的对象名称 -->
+                <!-- { "scope": { "id": 1, "name": "军事", "content": "军事天地" } } -->
+                <!-- <div>{{slot}}</div> -->
+                <div>{{slot.scope.id}}</div>
+                <div>{{slot.scope.name}}</div>
+                <div>{{slot.scope.content}}</div>
+                <!-- num为抛出的对象 -->
+                <!-- { "scope": { "id": 1, "name": "军事", "content": "军事天地" }, "num": 1 } -->
+                <!-- <div>{{slot}}</div> -->
+                <!-- <div>{{slot.num}}</div> -->
+            </template>
+        </demo-div>
+    </div>
+    <script>
+        Vue.component('demo-div',{
+            template:`
+                <div>
+                    <ul>
+                        <li v-for="item in data">
+                            <slot name='list' :scope='item' :num='1'></slot>
+                        </li>
+                    </ul>
+                </div>
+            `,
+            props: {
+                data:Array
+            }
+        })
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    obj:{
+                        id:1,
+                        name:'tom'
+                    },
+                    categories:[
+                        {
+                            id:1,
+                            name:'军事',
+                            content:'军事天地'
+                        },
+                        {
+                            id:2,
+                            name:'军事',
+                            content:'军事科技'
+                        },
+                        {
+                            id:3,
+                            name:'军事',
+                            content:'军事时事'
+                        }
+                    ]
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

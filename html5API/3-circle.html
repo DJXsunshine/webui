@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圆形绘制</title>
+    <script>
+        window.onload=function(){
+            //1.获取canvas
+            /** @type {HTMLCanvasElement} */
+            var canvas = document.getElementById("canvas");
+            //2.获取2d上下文对象
+            var context = canvas.getContext('2d');
+            //3.设置绘图样式
+            context.fillStyle='red';
+            context.strokeStyle='blue';
+            //4.设定线宽
+            // context.lineWidth=4;
+            //5.创建开始路径
+            context.beginPath();
+            //6.设置路径
+            context.arc(200, 200, 100, Math.PI / 180 * 0, Math.PI / 180 * 45,false);
+            //7.关闭路径
+            context.closePath();
+            //8.开始绘制圆
+            context.fill();
+            context.stroke();
+        }
+    </script>
+</head>
+<body>
+    <canvas width="600" height="400" style="border: 1px solid #333;" id="canvas"></canvas>
+</body>
+</html>

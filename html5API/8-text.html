@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制图像</title>
+    <script>
+        window.onload=function(){
+            //获取canvas对象
+            /** @type {HTMLCanvasElement} */
+            var canvas = document.getElementById('canvas');
+            //获取2d上下文对象
+            var context = canvas.getContext('2d');
+
+            context.fillStyle='red';
+            context.strokeStyle='blue';
+            context.lineWidth=1;
+
+            //sans-serif 表示无衬线字体
+            context.font='45px sans-serif';
+            //文本对齐方式
+            context.textAlign='center';
+            
+            //填充文本
+            context.fillText('hello world', 300, 300);
+            //描边文本
+            context.strokeText('你好 世界', 100, 100);
+            
+            
+        }
+    </script>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400" style="border: 1px solid #333;"></canvas>
+</body>
+</html>

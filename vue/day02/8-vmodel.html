@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双向数据绑定</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form action="/saveOrUpdate" @submit.prevent="submitHandler">
+            文章标题<input type="text" v-model="formData.title"><br>
+            文章样式
+            <label for="list-one">
+                <input type="radio" name="style" id="list-one" v-model="formData.liststyle" value="1">样式一<br>
+            </label>
+            <label for="list-two">
+                <input type="radio" name="style" id="list-two" v-model="formData.liststyle" value="2">样式二<br>
+            </label>
+            所属栏目<select name="" id="" v-model="formData.category"><br>
+                <option value="1">新闻</option>
+                <option value="2">娱乐</option>
+                <option value="3">体育</option>
+            </select><br>
+            正文<textarea name="" id="" cols="30" rows="10" v-model="formData.content"></textarea><br>
+            <input type="submit" value="提交">
+        </form>
+        {{formData}}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    formData:{}
+                }
+            }, methods: {
+                submitHandler(){
+                    alert(JSON.stringify(this.formData));
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

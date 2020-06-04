@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类名绑定</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<style>
+    .article{
+        color: #ccc;
+    }
+    .red{
+        background-color: red;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <!-- 静态绑定 -->
+        <div class="one">hello vue</div>
+        <!-- 动态绑定--对象 -->
+        <div :class="clazz">hello vue</div>
+        <!-- 动态绑定--字符串 -->
+        <div :class="clazz2">hello vue</div>
+        <!-- 动态绑定--数组 -->
+        <div :class="clazz3">hello vue</div>
+    </div>
+    <script>
+        // 根组件
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    clazz:{
+                        // 添加类名 true添加 false不添加
+                        article:true,
+                        category:false,
+                        red:true
+                    },
+                    clazz2:"article red",
+                    clazz3:[{
+                        article:true,
+                        red:true
+                    }]
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

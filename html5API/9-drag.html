@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖放API</title>
+    <style>
+        .parent{
+            border: 1px solid #333;
+            height: 200px;
+            margin: 10px;
+        }
+        .child{
+            width: 100px;
+            height: 100px;
+            border: 1px solid #333;
+            float: left;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            //目标元素
+            var parent = document.getElementsByClassName('parent')[0];
+            //拖动元素
+            var childs = document.getElementsByClassName('child');
+            //将类数组转数组 [...] | Array.from()
+            childs = Array.prototype.slice.call(childs);
+            childs.forEach(function(item){
+                //开始拖动
+                item.ondragstart = function () {
+                    console.log('dragstart');
+                    event.dataTransfer.setData('id',this.id);
+                }
+                //拖动中
+                item.ondrag = function () {
+                    console.log('drag');
+                }
+                //结束拖动
+                item.ondragend = function () {
+                    console.log('dragend');
+                }
+            });
+            //拖动元素进入目标元素
+            parent.ondragenter = function(){
+                console.log('dragenter');
+            }
+            //拖动元素在目标元素中移动
+            parent.ondragover = function(){
+                console.log('dragover');
+            }
+            //拖动元素放置到目标元素
+            parent.ondrop = function(){
+                console.log('drop');
+                //获取id
+                var id = event.dataTransfer.getData('id');
+                var dom = document.getElementById(id);
+                this.appendChild(dom);
+            }
+
+            parent.ondragstart = function () {
+                    // console.log('dragstart');
+            }
+            parent.ondragover=function(){
+                // 阻止默认行为
+                event.preventDefault();
+            }
+            parent.ondragend = function () {
+                    // console.log('dragend');
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- 目标元素 -->
+    <div class="parent"></div>
+    <!-- 拖动元素 -->
+    <!-- draggable="true"将元素设置为可拖动 -->
+    <div id="one" class="child" draggable="true">1</div>
+    <div id="two" class="child" draggable="true">2</div>
+    <div id="three" class="child" draggable="true">3</div>
+    <div id="four" class="child" draggable="true">4</div>
+</body>
+</html>

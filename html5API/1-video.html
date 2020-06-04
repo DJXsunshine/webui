@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音频</title>
+    <script>
+        window.onload=function(){
+            var video = document.getElementsByTagName("video")[0];
+            var btnDiv = document.getElementById("btn-div");
+            //事件代理
+            btnDiv.onclick = function(event){
+                switch(event.target.innerText){
+                    case '播放':
+                        video.play();
+                        break;
+                    case '暂停':
+                        video.pause();
+                        break;
+                    case '刷新':
+                        video.load();
+                        break;
+                    case '快进':
+                        video.currentTime+=10;
+                        break;
+                    case '快退':
+                        video.currentTime-=10;
+                        break;
+                    case '快倍速':
+                        video.playbackRate+=0.5;
+                        break;
+                    case '慢倍速':
+                        video.playbackRate-=0.5;
+                        break;
+                }
+            }
+            //通过上下键操控音量，左右键控制速率
+            //上38 下40 左37 右39
+            document.onkeydown = function (event) {
+                switch(event.keyCode){
+                    case 37:
+                        video.currentTime-=10;
+                        break;
+                    case 38:
+                        video.volume=video.volume<1.0?video.volume+0.1:video.volume;
+                        break;
+                    case 39:
+                        video.currentTime+=10;
+                        break;
+                    case 40:
+                        video.volume=video.volume>0.1?video.volume-0.1:video.volume;
+                        break;
+                }
+            }
+            //将播放和暂停放在一起
+            //根据按钮值判断
+            document.getElementById("toggle").onclick=function(){
+                if(this.innerText=='播放'){
+                    video.play();
+                    this.innerText='暂停';
+                }else{
+                    video.pause();
+                    this.innerText='播放';
+                }
+            }
+            //根据视频是否暂停判断
+            document.getElementById("toggle2").onclick=function(){
+                if(video.paused){
+                    video.play();
+                }else{
+                    video.pause();
+                }
+            }
+
+            //获取视频播放的百分比（进度）
+            //视频当前播放时间、视频长度、百分比存储到浏览器
+            document.getElementById('percentage').onclick=function(){
+                var total = video.duration;
+                var current = video.currentTime;
+                //计算出的百分比
+                var result = (current/total*100).toFixed(2)+'%';
+                console.log(result)
+            }
+        }
+    </script>
+</head>
+<body>
+    <video src="./1.mp4" controls autoplay></video>
+    <div id="btn-div">
+        <button>播放</button>
+        <button>暂停</button>
+        <button>刷新</button>
+        <button>快进</button>
+        <button>快退</button>
+        <button>快倍速</button>
+        <button>慢倍速</button>
+    </div>
+    <div>
+        <button id="toggle">播放</button>
+        <button id="toggle2">播放/暂停</button>
+        <button id="percentage">获取播放进度</button>
+    </div>
+</body>
+</html>

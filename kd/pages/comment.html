@@ -1,0 +1,179 @@
+<div class="comment">
+    <ul class="nav nav-tabs" id="commentTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="comment-set-tab" data-toggle="tab" href="#comment-set" role="tab"
+                aria-controls="comment-set" aria-selected="true">评论设置</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="comment-list-tab" data-toggle="tab" href="#comment-list" role="tab"
+                aria-controls="comment-list" aria-selected="false">评论列表</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="commentTabContent">
+        <div class="tab-pane fade show active" id="comment-set" role="tabpanel" aria-labelledby="comment-set-tab">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>编号</td>
+                        <td>文章标题</td>
+                        <td>所属栏目</td>
+                        <td>作者</td>
+                        <td>发布时间</td>
+                        <td>阅读次数</td>
+                        <td>评论状态</td>
+                    </tr>
+                </thead>
+                <tbody id="commentSetTable">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="comment-list" role="tabpanel" aria-labelledby="comment-list-tab">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>编号</td>
+                        <td>所属文章</td>
+                        <td>评论内容</td>
+                        <td>评论者</td>
+                        <td>评论时间</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody id="commentListTable">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 分页插件 -->
+    <div style="text-align: center;">
+        <div id="pNum" class="num"></div>
+        <div id="commentPage" class="demo"></div>
+    </div>
+</div>
+
+<script>
+    // 查询数据时已将数据放入对应页面中
+    // $('#commentTab').on('click', 'li', function () {
+    //     switch ($(this).text().trim()) {
+    //         case '评论设置':
+    //             break;
+    //         case '评论列表':
+    //             break;
+    //     }
+    // })
+
+    //评论审核
+    $('table').on('click', '.changeStatus button', function () {
+        var id = $(this).closest('tr').find('input').val();
+        myAjax('/manager/comment/checkComment', 'get', { id: id, status: "审核通过" }, function (res) {
+            if (res.status == 200) {
+                tips(res.message);
+                findAllComment(0);
+            } else {
+                tips(res.message);
+            }
+        })
+    });
+
+    //评论删除
+    $('#commentListTable').on('click','.comment-delete',function(){
+        var deleteId = $(this).closest('tr').find('input').val();
+        var result = confirm('这项操作会使评论数据丢失，你确定要进行此操作吗？');
+        if(result){
+            myAjax('/manager/comment/deleteCommentById','get',{id:deleteId},function(res){
+                if (res.status == 200) {
+                    tips(res.message);
+                    findAllComment(0);
+                } else {
+                    tips('删除评论失败');
+                }
+            })
+        }
+    })
+
+    var categorys;
+    findAllCategory();
+    function findAllCategory() {
+        myAjax('/manager/category/findAllCategory', 'get', {}, function (res) {
+            categorys = res.data;
+        })
+    }
+
+    findAllComment(0);
+    function findAllComment(page) {
+        myAjax('/manager/comment/findComment', 'get', {
+            page: page,
+            pageSize: 7
+        }, function (res) {
+            $('#commentSetTable').empty();
+            $('#commentListTable').empty();
+            res.data.list.forEach(function (item) {
+                var newTr = $(`
+                    <tr>
+                        <td><input type="checkbox" name="" id="" value="`+ item.id + `"></td>
+                        <td>`+ (item.article ? item.article.title : '-') + `</td>
+                        <td>`+ item.content + `</td>
+                        <td>`+ (item.customer ? item.customer.username : '-') + `</td>
+                        <td>`+ item.commenttime + `</td>
+                        <td>
+                            <div class='changeStatus'>`+ (item.status == '审核通过' ? "已通过" : '<button class="btn btn-warning">通过</button>') + `</div>    
+                        </td>
+                        <td>
+                            <div><i class="iconfont icon-shanchu comment-delete" title="删除" style="cursor: pointer;"></i></div>
+                        </td>
+                    </tr>
+                `);
+                $('#commentListTable').append(newTr);
+
+                //解决categorys数据处理时间，导致无法获取的问题
+                setTimeout(function () {
+                    //如何将栏目categoryId替换为栏目名字
+                    var categoryName;
+                    if (item.article) {
+                        //查询所有栏目
+                        categoryName = categorys.filter(function (it) {
+                            return it.id == item.article.categoryId;
+                        })[0].name;
+                    }
+                    var newTr = $(`
+                        <tr>
+                            <td><input type="checkbox" name="" id="" value="`+ item.id + `"></td>
+                            <td>`+ (item.article ? item.article.title : '-') + `</td>
+                            <td>`+ (item.article ? categoryName : '-') + `</td>
+                            <td>`+ (item.customer ? item.customer.nickname : '-') + `</td>
+                            <td>`+ (item.article ? item.article.publishtime : '-') + `</td>
+                            <td>`+ (item.article ? item.article.readtimes : '-') + `</td>
+                            <td>
+                                <div class='changeStatus'>`+ (item.status == '审核通过' ? item.status : '<button class="btn btn-info">审核</button>') + `</div>    
+                            </td>
+                        </tr>
+                    `);
+                    $('#commentSetTable').append(newTr);
+                }, 500)
+            })
+
+            // 2.分页查询
+            $("#commentPage").sPage({
+                page: res.data.page + 1,//当前页码，必填
+                total: res.data.total,//数据总条数，必填
+                pageSize: res.data.pageSize,//每页显示多少条数据，默认10条
+                showTotal: true,//是否显示总条数，默认关闭：false
+                totalTxt: "共{total}条",//数据总条数文字描述，{total}为占位符，默认"共{total}条"
+                noData: false,//没有数据时是否显示分页，默认false不显示，true显示第一页
+                showSkip: true,//是否显示跳页，默认关闭：false
+                showPN: true,//是否显示上下翻页，默认开启：true
+                prevPage: "上一页",//上翻页文字描述，默认“上一页”
+                nextPage: "下一页",//下翻页文字描述，默认“下一页”
+                fastForward: 5,//快进快退页数，默认0表示不开启快进快退
+                backFun: function (page) {
+                    //点击分页按钮回调函数，返回当前页码
+                    findAllComment(page - 1);
+                }
+            });
+        })
+    }
+</script>

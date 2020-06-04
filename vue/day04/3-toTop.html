@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动到页面最上方</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <style>
+        #to-top-btn{
+            position: fixed;
+            bottom: 10%;
+            right: 5%;
+            height: 80px;
+            width: 80px;
+            border-radius: 100%;
+            border: none;
+            cursor: pointer;
+        }
+        #to-top-btn:hover{
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+        ul{
+            height: 400px;
+            overflow: auto;
+        }
+        li{
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul id="scrollUl">
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+
+        <div style="height: 3000px;"></div>
+        <button id="to-top-btn" ref="toTopBtn" @click="toTopHandler">回到顶部</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+
+                }
+            },
+            mounted () {
+                // 1.监听页面滚动
+                window.addEventListener('scroll',this.scrollToTop);
+                // 3.处理页面bug：页面加载完毕隐藏按钮
+                this.$refs.toTopBtn.style.display = "none";
+                $("#scrollUl").niceScroll({
+                    cursorWidth:'6px',
+                    cursorcolor:'yellow'
+                })
+            },
+            created () {
+                // this.$refs.toTopBtn.style.display = "none";// TypeError: "this.$refs.toTopBtn is undefined"  
+            },
+            beforeMount () {
+                // this.$refs.toTopBtn.style.display = "none";// TypeError: "this.$refs.toTopBtn is undefined"
+            },
+            methods: {
+                // 2.定义方法：监听页面滚动时，显示与隐藏上浮按钮
+                scrollToTop(){
+                    let scrollTop = document.documentElement.scrollTop;
+                    // outerHeight返回元素的高度（包括padding和border）
+                    let browerHeight = window.outerHeight;
+                    if(scrollTop>browerHeight){
+                        // 显示按钮
+                        this.$refs.toTopBtn.style.display = "block";
+                    }else{
+                        // 隐藏按钮
+                        this.$refs.toTopBtn.style.display = "none";
+                    }
+                },
+                toTopHandler(){
+                    // document.documentElement.scrollTop = 0;
+                    let doc = document.documentElement
+                    $(doc).animate({
+                        scrollTop : 0
+                    },500);
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

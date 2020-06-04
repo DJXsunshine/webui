@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>msg原始值：{{msg}}</div>
+        <div>msg反转值-直接操作：{{msg.split('').reverse().join('')}}</div>
+        <div>msg反转值-计算属性：{{reverseMsg}}</div>
+        <div>msg反转值-计算属性：{{reverseMsg}}</div>
+        <div>msg反转值-计算属性：{{reverseMsg}}</div>
+        <div>msg反转值-计算属性：{{reverseMsg}}</div>
+        <div>msg反转值-方法：{{reverseHandler()}}</div>
+        <div>msg反转值-方法：{{reverseHandler()}}</div>
+        <div>msg反转值-方法：{{reverseHandler()}}</div>
+        <div>msg反转值-方法：{{reverseHandler()}}</div>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    msg: 'hello Msg'
+                }
+            }, 
+            methods: {
+                reverseHandler(){
+                    console.log('reverseHandler',this.msg);
+                    return this.msg.split('').reverse().join('');
+                }
+            },
+            // 计算属性
+            computed: {
+                // reverseMsg:function(){
+                //     return this.msg.split('').reverse().join('');
+                // },
+                reverseMsg(){
+                    console.log('reverseMsg',this.msg);
+                    return this.msg.split('').reverse().join('');
+                }
+            }
+        })  
+        // setInterval(() => {
+        //     vm.msg += Math.ceil(Math.random()*10);
+        // }, 2000);
+    </script>
+</body>
+
+</html>

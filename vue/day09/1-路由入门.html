@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <!-- 引入路由 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 5.路由出口 -->
+        <router-view></router-view>
+        <!-- 6.路由跳转,router-link本质是一个a标签的跳转 -->
+        <router-link to="/category">Category</router-link>
+        <router-link to="/article">Article</router-link>
+    </div>
+    <script>
+        // 1.定义 (路由) 组件
+        let Category = {
+            template: `<div>栏目管理</div>`
+        };
+        // 2.创建router实例
+        let router = new VueRouter({
+            // 3.定义路由
+            routes: [{
+                path: '/category',
+                component: Category
+            }, {
+                path: '/article',
+                component: {
+                    template: `<div>文章管理</div>`
+                }
+            }]
+        })
+        // 创建vue实例
+        new Vue({
+            el: '#app',
+            // 4.将router注册到根组件
+            router
+        })
+    </script>
+</body>
+
+</html>

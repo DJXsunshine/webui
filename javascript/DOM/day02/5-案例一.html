@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超时调用接口</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <!-- 引入axios -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        new Vue({
+            el:"#app",
+            data(){
+                return{
+                    list:[]
+                }
+            },
+            created () {
+              this.findAll();  
+              setTimeout(()=>{
+                this.findByName();
+              },1000)
+            },
+            methods: {
+                findAll(){
+                    axios.get('http://47.106.244.1:8099/manager/category/findAllCategory').then((res)=>{
+                        // console.log(res.data.data)
+                        this.list=res.data.data;
+                    })
+                },
+                findByName(){
+                    var name = this.list[0].name;
+                    axios.get('http://47.106.244.1:8099/manager/category/findCategoryByCategoryname?name='+name).then((res)=>{
+                        console.log(res.data.data)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

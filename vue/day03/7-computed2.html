@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性的应用</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <table class="table">
+            <thead>
+                <th>编号</th>
+                <th>作者姓名</th>
+                <th>作者昵称</th>
+                <th>注册时间</th>
+            </thead>
+            <tbody>
+                <tr v-for="item in newUsers" :key="item.id">
+                    <td>{{item.id}}</td>
+                    <td>{{item.username}}</td>
+                    <td>{{item.nickname}}</td>
+                    <td>{{item.regtime}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    users:[]
+                }
+            }, methods: {
+                findUser(){
+                    $.ajax({
+                        url:'http://106.54.117.183:8099/manager/user/findAllUser',
+                        method:'get',
+                        data:{},
+                        success:res=>{
+                            this.users = res.data;
+                        }
+                    });
+                }
+            },
+            created () {
+                this.findUser();
+            },
+            computed: {
+                newUsers(){
+                    this.users.forEach(item=>{
+                        item.regtime = moment(item.regtime).format('YYYY-MM-DD hh:mm:ss');
+                    })
+                    return this.users;
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

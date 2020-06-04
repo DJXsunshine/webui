@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节点操作</title>
+    <style>
+        .parent{
+            height: 200px;
+            border: 1px solid red;
+        }
+        .parent div{
+            height: 100px;
+            width: 100px;
+            border: 1px solid #333;
+            float: left;
+            margin: 50px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var parent = document.getElementsByClassName("parent")[0];
+            var item1 = document.getElementsByClassName("item1")[0];
+            var item3 = document.getElementsByClassName("item3")[0];
+            //创建新节点
+            var div = document.createElement('div');
+            console.log(div);
+
+            // parent.appendChild(div);
+            parent.insertBefore(div,item1)
+
+            parent.removeChild(item3)
+
+            var item1_clone = item1.cloneNode();
+            console.log(item1_clone)
+            parent.appendChild(item1_clone)
+
+            var item1_clone2 = item1.cloneNode(true);
+            parent.appendChild(item1_clone2)
+        }
+    </script>
+</head>
+<body>
+    <div class="parent">
+        <div class="item1">item1</div>
+        <div>item2</div>
+        <div class="item3">item3</div>
+    </div>
+</body>
+</html>

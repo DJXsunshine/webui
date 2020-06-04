@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面切换</title>
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <style>
+        .left{
+            height: 300px;
+            background-color: teal;
+            float: left;
+            width: 20%;
+        }
+        .right{
+            height: 300px;
+            background-color: #ccc;
+            float: right;
+            width: 80%;
+        }
+    </style>
+    <script>
+        $(function(){
+            // $('.left div:eq(0)').click(function () {
+            //     console.log(this)
+            //     $('.right').load('./load-article.html');
+            // })
+            // $('.left div:eq(1)').click(function () {
+            //     console.log(this)
+            //     $('.right').load('./load-category.html')
+            // })
+
+            //事件代理
+            $('.left').click(function (event) {
+                console.log(event.target.innerText);
+                switch(event.target.innerText){
+                    case '文章管理':
+                        $('.right').load('./load-article.html');
+                        break;
+                    case '栏目管理':
+                        $('.right').load('./load-category.html');
+                        break;
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="left">
+        <div>文章管理</div>
+        <div>栏目管理</div>
+    </div>
+    <div class="right">
+
+    </div>
+</body>
+</html>

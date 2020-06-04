@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹框</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="showDialog">显示警告框</button>
+        <!-- 组件调用 -->
+        <demo-outer title="警告" :visible="visible" @close="closeDialog"></demo-outer>
+    </div>
+    <script>
+        // 全局注册属性
+        Vue.component('demo-outer', {
+            template: `
+                <div :style="style" v-if="visible">
+                    {{title}}
+                    <span style="position:absolute;top:10%;right:1%;" @click="closeDialog">X</span>
+                </div>
+            `,
+            data() {
+                return {
+                    style:{
+                        backgroundColor:'#ccc',
+                        color:'red',
+                        borderRadius:"4px",
+                        padding:"1em",
+                        position:'relative'
+                    }
+                }
+            },
+            props: ['title','visible'],
+            methods:{
+                closeDialog(){
+                    this.$emit('close');
+                }
+            }
+        })
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    visible:false
+                }
+            },
+            methods: {
+                // 显示警告框
+                showDialog(){
+                    this.visible = true
+                },
+                closeDialog(){
+                    this.visible = false
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

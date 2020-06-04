@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul v-for="(item,index) in list" :key="item.id">
+            <li>
+                <span v-if="index==0" style="background-color: red;">No.1</span>
+                <span v-else-if="index==1" style="background-color: yellow;">No.2</span>
+                <span v-else-if="index==2" style="background-color: blue;">No.3</span>
+                <span v-else style="background-color: #ccc;">No.{{index+1}}</span>
+                <span>{{item.name}}</span>
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    list:[{
+                        id:1,
+                        name:'无声告白',
+                        readTimes:498
+                    },{
+                        id:2,
+                        name:'红楼梦',
+                        readTimes:457
+                    },{
+                        id:3,
+                        name:'百年孤独',
+                        readTimes:444
+                    },{
+                        id:4,
+                        name:'西游记',
+                        readTimes:500
+                    }]
+                }
+            }, methods: {
+
+            }
+        })  
+    </script>
+</body>
+</html>

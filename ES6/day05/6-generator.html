@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function* sayName(){
+            yield '25';
+            return '结束';
+        }
+        let res = sayName();
+        console.log(res); // Generator {  }
+        console.log(res.next());
+        console.log(res.next());
+        console.log(res.next());
+        console.log(res.next());
+        console.log(res.next());
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

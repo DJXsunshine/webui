@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            // 获取按钮
+            var btn = $('button');
+            // 给按钮绑定事件
+            btn.on('click',function(){
+                var checkboxs = $('div :checkbox:checked')
+                console.log([...checkboxs]);
+                var arr = [...checkboxs];
+                arr.forEach(element => {
+                   console.log(element.value) 
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+    <button>获取值</button>
+    <div>
+        <input type="checkbox" name="" value="sing" id="sing"><label for="sing">唱</label>
+        <input type="checkbox" name="" value="jump" id="jump"><label for="jump">跳</label>
+        <input type="checkbox" name="" value="rap" id="rap"><label for="rap">rap</label>
+        <input type="checkbox" name="" value="basketball" id="basketball"><label for="basketball">篮球</label>
+    </div>
+</body>
+</html>

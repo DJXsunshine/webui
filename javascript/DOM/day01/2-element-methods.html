@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本节点方法</title>
+    <script>
+        window.onload=function(){
+            var dom = document.getElementsByClassName('div')[0];
+            console.log("dom.style:"+dom.style);
+            console.log("dom.getAttribute('style'):"+dom.getAttribute('style'));
+            dom.setAttribute("style","height=2em;");
+
+            //返回文档中匹配指定css选择器的第一个元素
+            var div = document.querySelector(".div")
+            console.log(div)
+            //返回文档中匹配指定css选择器的所有元素
+            var divAll = document.querySelectorAll(".div")
+            console.log(divAll)
+        }
+    </script>
+</head>
+<body>
+    <div style="color: yellowgreen;" class="div">火狐</div>
+    <div style="color: yellowgreen;" class="div">火狐</div>
+    <div style="color: yellowgreen;" class="div">火狐</div>
+    <div style="color: yellowgreen;" class="div">火狐</div>
+    <div style="color: yellowgreen;" class="div">火狐</div>
+</body>
+</html>

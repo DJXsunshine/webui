@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery选择器</title>
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script>
+        // $(function(){
+        //     // 标签选择器
+        //     var btn = $('button');
+        //     console.log(btn);
+
+        //     // id选择器
+        //     var firstDiv = $('#one');
+        //     console.log(firstDiv);
+
+        //     var secondDiv = $('#one\\[bar\\]');
+        //     console.log(secondDiv)
+
+        //     var lastDiv = $('#one\\.bar');
+        //     console.log(lastDiv)
+        // })
+
+        // $(function(){
+        //     var li = $('.one li');
+        //     console.log(li)
+        //     var li2 = $('.one > li');
+        //     console.log(li2)
+        // })
+
+        // $(function(){
+        //     var div = $('.one + div');
+        //     console.log(div)
+        //     var div = $('.one ~ div');
+        //     console.log(div)
+        // })
+        // $(function(){
+        //     var div = $('.one div:first')
+        //     console.log(div)
+        //     var div = $('.one div:last')
+        //     console.log(div)
+        //     var div = $('.one div:nth-child(3)')
+        //     console.log(div)
+        // })
+
+        $(function () {
+            var input = $('input:not(:checked)')
+            console.log(input)
+        })
+    </script>
+</head>
+<body>
+    <!-- <button class="btn">按钮</button>
+    <div id="one">12</div>
+    <div id="one[bar]">34</div>
+    <div id="one.bar">56</div> -->
+
+    <!-- <ul class="one">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>
+            <ul>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </li>
+    </ul> -->
+
+    <!-- <div class="one">
+        <div>12</div>
+        <div>34</div>
+        <div>56</div>
+        <div>78</div>
+    </div> -->
+
+    <!-- <input type="checkbox" name="" id="" checked>
+    <input type="checkbox" name="" id="" checked>
+    <input type="checkbox" name="" id=""> -->
+</body>
+</html>

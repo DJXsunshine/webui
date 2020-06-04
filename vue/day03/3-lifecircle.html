@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    num：{{num}}
+</div>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data() {
+            return {
+                num:1
+            }
+        }, methods: {
+
+        },
+        beforeCreate () {
+            // 无法访问vue实例中的data及methods
+            console.log('beforeCreate',this.num);//beforeCreate undefined
+            console.log('beforeCreate',document.getElementById('app').innerHTML);
+            alert('beforeCreate');
+        },
+        created () {
+            // vue实例创建完全，可以访问到vue实例中的data及methods
+            // 常用于在页面加载完毕后，立即查询某些数据（文章列表）
+            console.log('created',this.num);//created 1
+            console.log('created',document.getElementById('app').innerHTML);
+            alert('created');   
+        },
+        beforeMount () {
+            // 完成模板的编译（将html转换为DOM）
+            console.log('beforeMount',this.num);//beforeMount 1
+            console.log('beforeMount',document.getElementById('app').innerHTML);
+            alert('beforeMount');  
+        },
+        mounted () {
+            // 完成数据绑定，页面首次渲染data中的数据
+            // 其实是vue实例创建的最后一个生命周期函数
+            // 常用于改变DOM的样式（滚动条样式、监听页面滚动）
+            console.log('mounted',this.num);
+            console.log('mounted',document.getElementById('app').innerHTML);
+            alert('mounted');  
+        },
+        beforeUpdate () {
+            // data中数据被更改，渲染到页面之前
+            console.log('beforeUpdate',this.num);
+            alert('beforeUpdate');  
+        },
+        updated () {
+            // data中数据被更改，重新渲染到页面上
+            console.log('updated',this.num);
+            alert('updated');   
+        },
+        beforeDestroy () {
+            
+        },
+        destroyed () {
+            
+        }
+    })  
+    let id = setInterval(() => {
+        vm.num++;
+        if(vm.num==10){
+            clearInterval(id);
+        }
+    }, 1000);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 基于回调函数的异步操作的封装
+        function getCallBack(url,successHandler,errorHandler){
+            // 1. 实例化xhr对象
+            var xhr = new XMLHttpRequest();
+            // 2. 打开请求
+            xhr.open('get',url);
+            // 3.发送请求
+            xhr.send();
+            // 4. 设置响应结果为json对象
+            xhr.responseType = 'json';
+
+            // 5. 设置监听
+            xhr.onreadystatechange = function(){
+                if(this.readyState ==4){
+                    if(this.status == 200){
+                        // 成功的回调函数
+                        successHandler(this.response)
+                    } else {
+                        // 错误的回调函数
+                        errorHandler(this.response)
+                    }
+                }
+            }
+
+        }
+        getCallBack('http://39.96.21.48:8099/manager/category/findAllCategory',function(res){
+            console.log(res)
+        },function(err){
+            console.log(err)
+        })
+        console.log('end');
+        // 先打印end，在输出请求结果
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

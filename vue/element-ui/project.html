@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>element-ui的使用</title>
+    <!-- 引入cms样式 -->
+    <link rel="stylesheet" href="./cms.css">
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <!-- 引入element-ui样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入element-ui组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- 引入moment.js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="token">
+            你好：{{username}}
+            <a href="" v-on:click.prevent="logout">退出登录</a>
+
+            <el-tabs v-model="activeName">
+                <el-tab-pane label="文章管理" name="first">
+                    <!-- 搜索根据时间 -->
+                    <template>
+                        <div class="block">
+                            <span class="demonstration">日期搜索</span>
+                            <!-- format:显示在输入框中的格式 value-format:绑定值的格式 -->
+                            <el-date-picker v-model="dateValue" type="datetimerange" :picker-options="pickerOptions"
+                                range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+                                format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss" align="right">
+                            </el-date-picker>
+                        </div>
+                    </template>
+
+                    <!-- 发布文章 -->
+                    <el-button plain @click="showArticleVisible">发布</el-button>
+                    <!-- 发布文章模态框 -->
+                    <el-dialog title="发布文章" :visible.sync="article_visible">
+                        <el-form :model="article_form">
+                            <el-form-item label="文章标题" :label-width="formLabelWidth">
+                                <el-input v-model="article_form.title" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="文章封面" :label-width="formLabelWidth">
+                                <!-- 图片上传
+                                    action:图片服务器上传接口地址
+                                -->
+                                <el-upload action="http://134.175.100.63:5588/file/upload" list-type="picture-card"
+                                    :on-preview="handlePictureCardPreview" :on-success="successHandler" ref="upload">
+                                    <i class="el-icon-plus"></i>
+                                </el-upload>
+                                <el-dialog :visible.sync="dialogVisible">
+                                    <img width="100%" :src="dialogImageUrl" alt="">
+                                </el-dialog>
+                            </el-form-item>
+                            <el-form-item label="所属栏目" :label-width="formLabelWidth">
+                                <el-select v-model="article_form.categoryId" placeholder="请选择活动区域">
+                                    <el-option :label="item.name" :value="item.id" v-for="item in categories"
+                                        :key="item.id"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="列表样式" :label-width="formLabelWidth">
+                                <el-select v-model="article_form.liststyle" placeholder="请选择活动区域">
+                                    <el-option label="样式一" value="true"></el-option>
+                                    <el-option label="样式二" value="false"></el-option>
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item label="正文">
+                                <el-input type="textarea" v-model="article_form.content"></el-input>
+                            </el-form-item>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button @click="article_visible = false">取 消</el-button>
+                            <el-button type="primary" @click="addArticle">确 定</el-button>
+                        </div>
+                    </el-dialog>
+
+                    <!-- 文章数据 -->
+                    <!-- cell-click	当某个单元格被点击时会触发该事件 -->
+                    <el-table :data="articles.list" @cell-click="showBigPicture" stripe style="width: 100%">
+                        <el-table-column prop="title" label="文章标题" width="180">
+                        </el-table-column>
+                        <el-table-column prop="content" label="文章内容" width="380">
+                        </el-table-column>
+                        <el-table-column prop="publishtime" :formatter="dateFormat" label="发布时间" width="180">
+                        </el-table-column>
+                        <el-table-column prop="source" label="文章封面">
+                            <!-- 使用插槽 显示图片 -->
+                            <template slot-scope="scope">
+                                <img :src="scope.row.source" alt="" height="100px">
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="status" label="文章状态">
+                            <template slot-scope="scope">
+                                <el-switch @change="checkArticle(scope.row)" v-model="scope.row.status"
+                                    :active-value="1" :inactive-value="0">
+                                </el-switch>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="操作">
+                            <template slot-scope="scope">
+                                <el-button size="mini" type="danger" @click="articleDelete(scope.$index, scope.row)">删除
+                                </el-button>
+                            </template>
+                            <!-- <template>
+                                <el-popconfirm
+                                  title="确定删除当前行数据吗？"
+                                  :onConfirm="articleDelete(scope.$index, scope.row)"
+                                >
+                                  <el-button slot="reference">删除</el-button>
+                                </el-popconfirm>
+                            </template> -->
+                        </el-table-column>
+                    </el-table>
+
+                    <!-- 分页 -->
+                    <!-- current-page	当前页数
+                        page-size	每页显示条目个数
+                        current-change	currentPage 改变时会触发
+                    -->
+                    <el-pagination background @current-change="changePage" :page-size="articles.pageSize"
+                        :current-page="articles.page+1" layout="prev, pager, next" :total="articles.total">
+                    </el-pagination>
+
+                    <!-- 查看大图模态框 -->
+                    <el-dialog title="大图显示" :visible.sync="picture_visible">
+                        <img :src="imgUrl" alt="" width="100%">
+                        <span slot="footer" class="dialog-footer">
+                            <el-button type="primary" @click="picture_visible = false">确 定</el-button>
+                        </span>
+                    </el-dialog>
+                </el-tab-pane>
+                <el-tab-pane label="栏目管理" name="second">栏目管理</el-tab-pane>
+                <el-tab-pane label="用户管理" name="third">用户管理</el-tab-pane>
+                <el-tab-pane label="评论管理" name="fourth">评论管理</el-tab-pane>
+            </el-tabs>
+        </div>
+        <div v-else class="loginPage">
+            <h3>{{title}}</h3>
+            <el-form :model="login_form" label-width="80px">
+                <el-form-item label="用户名">
+                    <el-input v-model="login_form.username"></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                    <el-input type="password" v-model="login_form.password"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="loginHandler">登录</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
+    <!-- 引入cms的js -->
+    <script src="./cms.js"></script>
+</body>
+
+</html>

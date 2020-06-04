@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show切换</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <style>
+        .search div{
+            float: left;
+        }
+        img{
+            height: 1.5em;
+        }
+        .items{
+            margin-left: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="search">
+            <div>分类</div>
+            <img v-bind:src="imgUrl" alt="" v-on:click="toggle">
+        </div>
+        <div class="items" v-show="ifShow" v-for="item in list" :key="item.id">
+            <div>{{item.name}}</div>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    ifShow:false,
+                    imgUrl:'./images/1.png',
+                    list:[{
+                        id:1,
+                        name:'历史'
+                    },{
+                        id:2,
+                        name:'数学'
+                    },{
+                        id:3,
+                        name:'语文'
+                    }]
+                }
+            }, methods: {
+                toggle(){
+                    if(this.imgUrl=='./images/1.png'){
+                        this.imgUrl='./images/2.png';
+                        this.ifShow=true;
+                    }else{
+                        this.imgUrl='./images/1.png';
+                        this.ifShow=false;
+                    }
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

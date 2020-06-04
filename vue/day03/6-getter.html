@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性Setter</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}--{{reverseMsg}}
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    msg: 'hello Msg'
+                }
+            }, methods: {
+
+            },
+            computed: {
+                reverseMsg:{
+                    // 计算属性默认只有getter，用于获取计算之后的结果
+                    get:function(){
+                        console.log('reverseMsg',this.msg);
+                        return this.msg.split('').reverse().join('');
+                    },
+                    // 对计算结果设置值时调用.需要时，可以添加setter，用于设置值
+                    set:function(val){
+                        console.log(val)
+                        this.msg = val;
+                    }
+                }
+            },
+            created () {
+                setInterval(() => {
+                    this.reverseMsg = 'tom';
+                }, 2000);
+            }
+        })  
+    </script>
+</body>
+
+</html>

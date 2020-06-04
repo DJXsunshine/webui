@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location对象</title>
+    <script>
+        console.log(location)
+        console.log(location.host)
+        console.log(location.href)
+        console.log(location.port)
+        window.onload=function(){
+            var btn=document.getElementsByTagName("button")[0];
+            btn.onclick=function(){
+                // location.assign("https://www.baidu.com");
+                // location.replace("https://www.baidu.com");
+                location.reload("https://www.baidu.com");
+            }
+        }
+    </script>
+</head>
+<body>
+    <button>按钮</button>
+</body>
+</html>

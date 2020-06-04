@@ -1,0 +1,43 @@
+.article{
+    height: 100%;
+    overflow: auto;
+}
+
+/* 文章顶部左侧区域 */
+.article .article-option .btn-left{
+    float: left;
+}
+
+.article .article-option .btn-left *{
+    margin: 5px;
+}
+
+/* 文章顶部右侧搜索区 */
+.article .article-option .btn-right{
+    float: right;
+}
+
+.article .article-option .btn-right *{
+    display: inline-block;
+    margin: 5px;
+}
+
+.article .article-option .btn-right input{
+    width: 6em;
+}
+
+.article .article-option .btn-right input[type=search]{
+    width: 15em;
+}
+
+#articleImgModel .modal-body img{
+    width: 100%;;
+}
+
+.listStyleImg{
+    width: inherit;
+}
+
+#editor > div{
+    width: 95%;
+}

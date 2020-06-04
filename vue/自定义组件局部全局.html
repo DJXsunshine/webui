@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+    <div v-global:123="global" v-local:456="local"></div>
+</div>
+<script>
+    Vue.directive('global', {
+        inserted: function (el, binding) {
+            // <div> global 123
+            console.log(el,binding.value,binding.arg);
+        }
+    })
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                global:'global',
+                local:'local'
+            }
+        },
+        directives: {
+            'local': {
+                inserted: function (el, binding) {
+                    // <div> local 456
+                    console.log(el,binding.value,binding.arg);
+                }
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

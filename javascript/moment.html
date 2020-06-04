@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>时间格式处理</title>
+	<!--引入第三方库moment.js-->	
+	<script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.24.0/moment.js"></script>
+	</head>
+<body>
+	<script type="text/javascript">
+		var date = new Date();
+		var result = moment(date).format("YYYY-MM-DD hh:mm:ss");
+		console.log(result)
+		console.log(moment());
+		var timestamp = Date.now();
+		var result2 = moment(timestamp).format("YYYY-MM-DD hh:mm:ss");
+		console.log(result2)
+	</script>
+</body>
+</html>

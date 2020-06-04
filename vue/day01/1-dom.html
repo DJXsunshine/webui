@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+<body>
+    <!-- <div class="" id="app"></div>
+    <script>
+        //生成p标签
+        var p = document.createElement('p');
+        //向p标签内部添加文本
+        var text = document.createTextNode('这是一段文本');
+        p.appendChild(text);
+        //追加到页面div中
+        document.getElementById('app').appendChild(p);
+    </script> -->
+
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>栏目名称</th>
+                    <th>栏目描述</th>
+                    <th>父栏目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" v-bind:key="item.id">
+                    <td><input type="checkbox" value="{{item.id}}"/></td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.comment}}</td>
+                    <td>{{item.parent}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data(){
+                return{
+                    list:[]
+                }
+            },
+            created () {
+                this.findCategory();
+            },
+            methods: {
+                findCategory(){
+                    // $.ajax({
+                    //     url:'http://106.54.117.183:8099/manager/category/findAllCategory',
+                    //     method:'get',
+                    //     data:{},
+                    //     success:res=>{
+                    //         this.list = res.data;
+                    //     }
+                    // })
+
+                    // axios.get('http://106.54.117.183:8099/manager/category/findAllCategory')
+                    // .then(res=>{
+                    //     this.list = res.data.data;
+                    // })
+
+                    $.get('http://106.54.117.183:8099/manager/category/findAllCategory',res=>{
+                        this.list = res.data;
+                    })
+                }
+            }
+        })
+
+        // findCategory();
+        // function findCategory(){
+        //     $.ajax({
+        //         url:'http://106.54.117.183:8099/manager/category/findAllCategory',
+        //         method:'get',
+        //         data:{},
+        //         success:function(res){
+        //             res.data.forEach(item=>{
+        //                 var newTr = $(`
+        //                     <tr>
+        //                         <td><input type="checkbox" value='`+item.id+`'/></td>
+        //                         <td>`+item.name+`</td>
+        //                         <td>`+item.comment+`</td>
+        //                         <td>`+item.parent+`</td>
+        //                     </tr>
+        //                 `);
+        //                 $('tbody').append(newTr);
+        //             })
+        //         }
+        //     })
+        // }
+    </script>
+</body>
+</html>

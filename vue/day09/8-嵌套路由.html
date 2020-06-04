@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌套路由</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <!-- 引入路由 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/category">栏目管理</router-link>
+        <router-link to="/order">订单页面</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        let Category = {
+            template: `<div>栏目管理</div>`
+        };
+        let Orders = {
+            template: `
+                <div>
+                    <div>订单页面</div>
+                    <router-link to="/order/all">所有订单</router-link>
+                    <router-link to="/order/completed">已完成</router-link>
+                    <router-link to="/order/unCompleted">未完成</router-link>
+                    <router-view></router-view>
+                </div>
+            `
+        };
+        let OrderAll = {
+            template: `<div>所有订单</div>`
+        };
+        let OrderCompleted = {
+            template: `<div>已完成</div>`
+        };
+        let OrderUnCompleted = {
+            template: `<div>未完成</div>`
+        };
+
+        let router = new VueRouter({
+            routes: [{
+                    path: '/category',
+                    component: Category
+                },
+                {
+                    path: '/order',
+                    component: Orders,
+                    children:[
+                        { path: 'all', component: OrderAll },
+                        { path: 'completed', component: OrderCompleted },
+                        { path: 'unCompleted', component: OrderUnCompleted }
+                    ]
+                }
+            ]
+        })
+        // 创建vue实例
+        new Vue({
+            el: '#app',
+            router
+        })
+    </script>
+</body>
+
+</html>

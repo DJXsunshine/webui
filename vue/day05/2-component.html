@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件注册</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <demo-outer></demo-outer>
+        <demo-inner></demo-inner>
+    </div>
+    <script>
+        // 全局注册属性
+        Vue.component('demo-outer', {
+            template: `
+                <div>demo-outer</div>
+            `
+        })
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+
+                }
+            },
+            // 局部注册
+            components: {
+                'demo-inner': {
+                    template: `
+                        <button @mouseover="hover($event)" @mouseleave="leave($event)" :style="style">demo-inner</button>
+                    `,
+                    data() {
+                        return {
+                            style:{
+                                color:"#fff",
+                                "background-color":"#409eff",
+                                "font-size":"16px",
+                                padding:"0.5em 1.5em",
+                                border:"none",
+                                "border-radius":"4px",
+                                cursor:"pointer"
+                            }
+                        }
+                    },methods: {
+                        // 鼠标移入
+                        hover(event){
+                            event.target.style.background = "rgb(102,177,205)";
+                        },
+                        // 鼠标移出
+                        leave(event){
+                            event.target.style.background = "#409eff";
+                        }
+                    }
+                },
+                'demo-outer': {
+                    template: `
+                        <div>demo-inner</div>
+                    `
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

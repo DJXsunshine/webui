@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>默认插槽</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 组件调用 -->
+        <demo-outer title="警告">
+            <h1>你好</h1>
+        </demo-outer>
+    </div>
+    <script>
+        // 全局注册属性
+Vue.component('demo-outer', {
+    template: `
+        <div>
+            {{title}}
+            <slot></slot>
+        </div>
+    `,
+    data() {
+        return {}
+    },
+    props: ['title']
+})
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+
+                }
+            },
+            methods: {
+
+            }
+        })  
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件传值</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <demo-outer title="title" visible="false"></demo-outer> -->
+        <demo-outer  :visible="ifVisible"></demo-outer>
+    </div>
+    <script>
+        // 全局注册属性
+        Vue.component('demo-outer', {
+            template: `
+                <div>
+                    hello
+                    <div v-if="visible">{{title}}</div>
+                </div>
+            `,
+            props: {
+                // 期望接受的参数title是String类型
+                title:{
+                    // 数据类型
+                    type:String,
+                    // 是否必须
+                    required:true
+                },
+                // 期望接受的参数title是Boolean类型
+                visible:Boolean
+            }
+        })
+        // 第一个vue实例对象
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title:'我的第一个组件',
+                    ifVisible:false
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

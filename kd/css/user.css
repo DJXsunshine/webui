@@ -1,0 +1,55 @@
+.user{
+    height: 100%;
+    overflow: auto;
+}
+
+/* 去除圆点 */
+.user #myTab li{
+    list-style: none;
+}
+
+/* 头部切换样式 */
+.nav-item a{
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.list-group .list-group-item{
+    display: flex;
+}
+
+.list-group-item div{
+    display: inline-block;
+}
+
+.list-group-item div:first-child{
+    flex-basis: 30%;
+}
+
+.list-group-item div:last-child{
+    flex-basis: 70%;
+    text-align: center;
+}
+
+#admin,#editor,#user,#other{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    border: none;
+    margin: 0;
+}
+
+.tab-pane .card{
+    margin: .6em 0;
+    flex-basis: 23%;
+}
+
+#addRoleBtn{
+    margin: 1em;
+}
+
+#admin > ul{
+    display: none;
+}

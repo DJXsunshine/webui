@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片切换</title>
+    <script>
+        window.onload=function(){
+            //获取按钮
+            var btn = document.getElementsByTagName('button')[0];
+            var img = document.getElementsByTagName('img')[0];
+            //给按钮绑定事件
+            btn.onclick=function(){
+                if(img.getAttribute('src')=='./images/1.png'){
+                    img.src='./images/2.gif';
+                }else{
+                    img.src='./images/1.png';
+                }
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <img src="./images/1.png" alt="">
+    <button>切换图片</button>
+</body>
+</html>

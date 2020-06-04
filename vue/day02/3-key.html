@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用key管理可复用元素</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="loginType == 'username'">
+            <label for="">username</label>
+            <input type="text" placeholder="请输入用户名" key="username">
+        </div>
+        <div v-if="loginType == 'email'">
+            <label for="">email</label>
+            <input type="text" placeholder="请输入邮箱" key="email">
+        </div>
+        <button v-on:click="toggle">切换登录方式</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    loginType:'username'
+                }
+            }, methods: {
+                toggle(){
+                    if(this.loginType=='username'){
+                        this.loginType='email';
+                    }else{
+                        this.loginType='username';
+                    }
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+$.ajax({
+    url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+    method: 'get',
+    data:{},
+    success:function(res){
+        console.log(res.data);
+    }
+});
+$.ajax({
+    url: 'http://47.106.244.1:8099/manager/user/findAllUser',
+    method: 'get',
+    data:{},
+    success:function(res){
+        console.log(res.data);
+    }
+});
+// 两个请求的结果不知是谁先返回
+    </script>
+</body>
+</html>

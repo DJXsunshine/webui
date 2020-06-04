@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul v-for="(item,index) of list" v-bind:key="item.id">
+            <li>{{index}}-{{item}}</li>
+        </ul>
+        <ul v-for="num of 5" v-bind:key="num">
+            <li>{{num}}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    list: [{
+                        id: 1,
+                        name: 'xxx'
+                    }, {
+                        id: 2,
+                        name: 'bob'
+                    }, {
+                        id: 3,
+                        name: 'tom'
+                    }]
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>

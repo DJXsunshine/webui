@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件代理</title>
+    <style>
+        ul{
+            list-style: none;
+        }
+        ul{
+            border: 1px solid #333;
+            /* 清除浮动 */
+            overflow: hidden;
+        }
+        ul li{
+            height: 100px;
+            width: 100px;
+            border: 1px solid #333;
+            float: left;
+            margin: 50px;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var li = document.getElementsByTagName("li");
+            var ul = document.getElementsByTagName("ul")[0];
+            var btn = document.getElementsByTagName("button")[0];
+
+            ul.onmouseover=function(){
+                //获取标签名
+                // console.log(event.target.nodeName)
+                if(event.target.nodeName=='LI'){
+                    event.target.style.background='red';
+                }
+            }
+            ul.onmouseout=function(){
+                //获取标签名
+                // console.log(event.target.nodeName)
+                if(event.target.nodeName=='LI'){
+                    event.target.style.background='none';
+                }
+            }
+
+            btn.onclick=function(){
+                //新创建一个li
+                var newLi = document.createElement("li");
+                // console.log(newLi);
+                ul.appendChild(newLi);
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- 需求：实现光标移动到每个li上时，加背景色，其他li没有背景色 -->
+    <!-- 需求2：新增li情况下也要有如上功能 -->
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <button>新增li</button>
+</body>
+</html>

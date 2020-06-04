@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap-Switch</title>
+    <!-- 开关按钮bootstrap-switch样式 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-switch/4.0.0-alpha.1/css/bootstrap-switch.min.css"
+        rel="stylesheet">
+    <!-- 引入jQuery -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- 开关按钮bootstrap-switch的js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.min.js"></script>
+    <script>
+        $(function(){
+            var h = $('.bootstrap-switch-container').height();
+            $('.bootstrap-switch').css('border-radius',h);
+        })
+    </script>
+</head>
+
+<body>
+    <input type="checkbox" name="my-checkbox" checked>
+    <input type="checkbox" name="my-checkbox2" checked>
+</body>
+
+</html>
+<script>
+    $("[name='my-checkbox']").bootstrapSwitch();
+    $("[name='my-checkbox2']").bootstrapSwitch({
+        state: false, // 设置开关按钮的状态
+        onText: "启用",      // 设置ON文本  
+        offText: "禁用",    // 设置OFF文本  
+        onColor: "success",// 设置ON文本颜色(info/success/warning/danger/primary)  
+        offColor: "danger",  // 设置OFF文本颜色 (info/success/warning/danger/primary)  
+        size: "normal",    // 设置控件大小,从小到大  (mini/small/normal/large)  
+        onSwitchChange: function (event, state) {  // 当开关状态改变时触发
+            if (state == true) {
+                alert("ON");
+            } else {
+                alert("OFF");
+            }
+        }
+    });
+</script>

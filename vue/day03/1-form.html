@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+    <!-- 引入vue -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{formData}}
+        <form @submit.preven="saveArticle">
+            文章标题<input type="text" placeholder="请输入文章标题" v-model="formData.title"><br>
+            所属栏目
+            <select v-model="formData.categoryId">
+                <option value="">请选择</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{category.name}}</option>
+            </select><br>
+            文章标签
+            <label for="css">
+                <input type="checkbox" name="options" id="css" value="css" v-model="formData.options">css
+            </label>
+            <label for="html">
+                <input type="checkbox" name="options" id="html" value="html" v-model="formData.options">html
+            </label>
+            <label for="jQuery">
+                <input type="checkbox" name="options" id="jQuery" value="jQuery" v-model="formData.options">jQuery
+            </label><br>
+            文章样式
+            <!-- 单选按钮需要添加value值 -->
+            <label for="listOne">
+                <input type="radio" name="listStyle" id="listOne" value="1" v-model="formData.liststyle">样式一
+            </label>
+            <label for="listTwo">
+                <input type="radio" name="listStyle" id="listTwo" value="2" v-model="formData.liststyle">样式二
+            </label><br>
+            正文<textarea name="" id="" cols="30" rows="10" v-model="formData.content"></textarea><br>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    formData:{
+                        categoryId:1,
+                        options:[]
+                    },
+                    categories:[{
+                        id:1,
+                        name:'头条'
+                    },{
+                        id:2,
+                        name:'新闻'
+                    },{
+                        id:3,
+                        name:'体育'
+                    }]
+                }
+            }, methods: {
+                saveArticle(){
+                    alert(JSON.stringify(this.formData))
+                }
+            }
+        })  
+    </script>
+</body>
+
+</html>
